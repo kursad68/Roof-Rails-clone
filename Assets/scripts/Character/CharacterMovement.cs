@@ -7,12 +7,14 @@ public class CharacterMovement : MonoBehaviour
     private void OnEnable()
     {
         EventManager.GEtMovement += gC;
+    
 
     }
     private void OnDisable()
     {
         EventManager.GEtMovement -= gC;
-       
+    
+
     }
     CharacterMovement gC()
     {
@@ -27,4 +29,5 @@ public class CharacterMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.D))
             transform.position += transform.up * -2 * Time.deltaTime;
     }
+  
 }
