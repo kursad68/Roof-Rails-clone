@@ -14,6 +14,9 @@ public static class EventManager
     public static Func<CharacterMovement> GEtMovement;
     public static UnityEvent inPrefab = new UnityEvent();
     public static UnityEvent ForDifferent = new UnityEvent();
+    public static UnityEvent AnimationRun = new UnityEvent();
+    public static UnityEvent AnimationHanging = new UnityEvent();
     public static Action<float> onEnlargeSize;
+    public static Action<string,string> onAnimatorAction;
     public static UnityEvent onFireGround = new UnityEvent();
 }

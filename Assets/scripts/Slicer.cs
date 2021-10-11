@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using EzySlice;
+
 public class Slicer : MonoBehaviour
 {
 
@@ -99,7 +100,7 @@ public class Slicer : MonoBehaviour
     {
         GetCup.OutTrigerSlicer = true;
  
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(0.5f);
         GetCup.OutTrigerSlicer = false;
     }
 

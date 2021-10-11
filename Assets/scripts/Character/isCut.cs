@@ -11,6 +11,7 @@ public class isCut : MonoBehaviour
     public GameObject lowerPaddle;
     PrefabObject pf;
     CharacterMovement cM;
+    public bool isCutStay;
     private void OnEnable()
     {
         EventManager.GEtIsCutObject += gC;
@@ -54,9 +55,22 @@ public class isCut : MonoBehaviour
             transform.position =new Vector3(cM.transform.position.x,transform.position.y, cM.transform.position.z) ;
        else if (OutTrigerSlicer)
         transform.position= new Vector3(cM.transform.position.x,transform.position.y,transform.position.z);
-  
+
+
+        if (isCutStay == true)
+        {
+            StartCoroutine(İsCutOutTime());
+        }
+
+
     }
- 
+    IEnumerator İsCutOutTime()
+    {
+        yield return new WaitForSeconds(1.5f);
+        if (isCutStay == true)
+            Debug.Log("end dayi");
+
+    }
     private void DownSize()
     {
 
