@@ -11,7 +11,7 @@ public class CreatePaddleGround : MonoBehaviour
         {
             Debug.Log("hanging");
 
-            EventManager.AnimationHanging.Invoke();
+            EventManager.onAnimation.Invoke("Hang");
         }
     }
     

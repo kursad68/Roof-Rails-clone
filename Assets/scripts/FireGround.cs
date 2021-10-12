@@ -11,6 +11,7 @@ public class FireGround : MonoBehaviour
         if (collision.gameObject.GetComponent<isCut>())
         {if(i%10==0)
             EventManager.onFireGround.Invoke();
+          
         }
     }
 }

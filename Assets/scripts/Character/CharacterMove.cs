@@ -15,13 +15,13 @@ public class CharacterMove : MonoBehaviour
     }
     private void OnEnable()
     {
-        EventManager.AnimationRun.AddListener(AnimasyonRun);
-        EventManager.AnimationHanging.AddListener(AnimasyonHanging);
+        EventManager.onAnimation += AnimasyonTriger;
+    
     }
     private void OnDisable()
     {
-        EventManager.AnimationRun.RemoveListener(AnimasyonRun);
-        EventManager.AnimationHanging.RemoveListener(AnimasyonHanging);
+        EventManager.onAnimation -= AnimasyonTriger;
+      
     }
     private void Update()
     {
@@ -30,16 +30,18 @@ public class CharacterMove : MonoBehaviour
             transform.position = new Vector3(transform.position.x, getİsCut.transform.position.y - 1,transform.position.z);
         }
     }
-    private void AnimasyonRun()
+    private void AnimasyonTriger(string value)
     {
-        AnimationPlayTriger("Run");
-        isHang = false;
+        AnimationPlayTriger(value);
+        if (value == "Run"||value=="Dance") {
+            isHang = false;
+        }else if (value == "Hang")
+        {
+            isHang = true;
+        }
+      
     }
-    private void AnimasyonHanging()
-    {
-        AnimationPlayTriger("Hang");
-        isHang = true;
-    }
+ 
     public void AnimationPlayTriger(string Triger)
     {
 

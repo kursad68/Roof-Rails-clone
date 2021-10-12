@@ -5,10 +5,7 @@ using UnityEngine;
 public class PlussPaddle : MonoBehaviour
 {
 
-    private void Start()
-    {
-       
-    }
+ 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.GetComponent<isCut>())

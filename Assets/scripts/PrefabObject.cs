@@ -5,10 +5,7 @@ using UnityEngine;
 public class PrefabObject : MonoBehaviour
 {
 
-    void Start()
-    {
-        
-    }
+
     private void OnEnable()
     {
         EventManager.GEtPrefabObject += pf;
@@ -21,9 +18,5 @@ public class PrefabObject : MonoBehaviour
     {
         return GetComponent<PrefabObject>();
     }
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
 }

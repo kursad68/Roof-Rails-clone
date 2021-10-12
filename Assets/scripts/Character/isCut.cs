@@ -11,12 +11,11 @@ public class isCut : MonoBehaviour
     public GameObject lowerPaddle;
     PrefabObject pf;
     CharacterMovement cM;
-    public bool isCutStay;
+    GameManager GetGameManagerScript;
+    public bool isCutStay,dance;
     private void OnEnable()
     {
         EventManager.GEtIsCutObject += gC;
-   
-      
         EventManager.onEnlargeSize += EnlargeSize;
         EventManager.onFireGround.AddListener(() => {
             
@@ -29,8 +28,7 @@ public class isCut : MonoBehaviour
     {
         EventManager.GEtIsCutObject -= gC;
      EventManager.inPrefab.RemoveListener(createPrefab);
-      
-        EventManager.onEnlargeSize-=EnlargeSize;
+     EventManager.onEnlargeSize-=EnlargeSize;
         EventManager.onFireGround.RemoveListener(()=> {
            
             DownSize();
@@ -44,7 +42,7 @@ public class isCut : MonoBehaviour
    
     private void Start()
     {
-      
+        GetGameManagerScript = EventManager.getGameManager.Invoke();
         cM = EventManager.GEtMovement.Invoke();
        createPrefab();
 
@@ -61,23 +59,62 @@ public class isCut : MonoBehaviour
         {
             StartCoroutine(İsCutOutTime());
         }
+        else
+        {
+            StopAllCoroutines();
+        }
 
+        if (gameOver == true)
+            GetGameManagerScript.lost();
 
     }
     IEnumerator İsCutOutTime()
     {
-        yield return new WaitForSeconds(1.5f);
-        if (isCutStay == true)
-            Debug.Log("end dayi");
+        yield return new WaitForSeconds(3f);
+        if (isCutStay == true) 
+        {
+            if (GetGameManagerScript.isGameEnd == false) {
+                GetGameManagerScript.isGameEnd = true;
 
+                StartCoroutine(SpeedToReduce());
+            }
+            
+        }
+            
+
+    }
+    IEnumerator SpeedToReduce()
+    {
+        yield return new WaitForSeconds(0.3f);
+        if (cM.speed >= 1)
+        {
+            cM.speed -= 1;
+           
+        }
+        else
+        {
+            GetGameManagerScript.lost();
+            
+        }
+
+        StartCoroutine(SpeedToReduce());
     }
     private void DownSize()
     {
 
 
         if (transform.localScale.y > 0.5f)
+        {
             transform.localScale -= new Vector3(0, pf.GetComponent<Renderer>().bounds.size.z / 2, 0);
-        else gameOver = true;
+
+        }
+        else
+        {
+            if (GetGameManagerScript.isGameWin == false)
+                gameOver = true;
+            else
+                dance = true;
+        }
     }
     private void EnlargeSize(float value)
     {
@@ -93,7 +130,8 @@ public class isCut : MonoBehaviour
     {
         // GameObject lowPaddle = Instantiate(pf.gameObject, transform.position + new Vector3(0,0, GetComponent<Renderer>().bounds.size.z/2),Quaternion.Euler(90,0,0));
         // GameObject lowPaddle1 = Instantiate(pf.gameObject, transform.position - new Vector3(0, 0, GetComponent<Renderer>().bounds.size.z/2), Quaternion.Euler(90,0,0));
-        if (!gameOver)
+        Debug.Log(gameOver);
+        if (!gameOver&&dance==false)
         {
             GameObject lowPaddle = Instantiate(pf.gameObject, transform.position + new Vector3(0, 0, GetComponent<Renderer>().bounds.size.z / 2), Quaternion.Euler(90, 0, 0));
             GameObject lowPaddle1 = Instantiate(pf.gameObject, transform.position - new Vector3(0, 0, GetComponent<Renderer>().bounds.size.z / 2), Quaternion.Euler(90, 0, 0));

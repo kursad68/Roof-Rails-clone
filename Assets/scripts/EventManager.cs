@@ -16,7 +16,9 @@ public static class EventManager
     public static UnityEvent ForDifferent = new UnityEvent();
     public static UnityEvent AnimationRun = new UnityEvent();
     public static UnityEvent AnimationHanging = new UnityEvent();
+    public static Func<GameManager> getGameManager;
     public static Action<float> onEnlargeSize;
     public static Action<string,string> onAnimatorAction;
+    public static Action<string> onAnimation;
     public static UnityEvent onFireGround = new UnityEvent();
 }

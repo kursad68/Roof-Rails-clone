@@ -17,9 +17,9 @@ public class StayGroundControl : MonoBehaviour
         if (ic != null)
         {
             iCut.isCutStay = false;
-          
 
-                EventManager.AnimationRun.Invoke();
+
+            EventManager.onAnimation.Invoke("Run");
 
            
         }
@@ -30,6 +30,7 @@ public class StayGroundControl : MonoBehaviour
         if (ic != null)
         {
             iCut.isCutStay = true;
+            EventManager.onAnimation.Invoke("Hang");
         }
     }
 
